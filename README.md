@@ -1,24 +1,72 @@
-# README
+# Simple User Authentication
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Sometimes when learning to manage authentication in your front-end application, you need a simple way to test that. This app can be used for that.
 
-Things you may want to cover:
+## Base URL
 
-* Ruby version
+The base URL for this project is:
 
-* System dependencies
+```
+https://user-auth-test.herokuapp.com
+```
 
-* Configuration
+## Register Endpoint
 
-* Database creation
+**URL:** `/register`
 
-* Database initialization
+- Type: `POST`
+- Required Body: A JSON object containing the following:
+  - `email`
+  - `password`
+  - `full_name`
+  - `message`
+  
+ **Returns**
+ 
+```json
+{
+    "success": "true",
+    "email": "<EMAIL>"
+}
+```
 
-* How to run the test suite
+## Login Endpoint
 
-* Services (job queues, cache servers, search engines, etc.)
+**URL:** `/login`
 
-* Deployment instructions
+- Type: `POST`
+- Required Body: A JSON object containing the following:
+  - `email`
+  - `password`
+  
+ **Returns**
+ 
+```json
+{
+    "success": "true",
+    "email": "<EMAIL>",
+    "auth_token": "<TOKEN>"
+}
+```
 
-* ...
+
+## Dashboard Endpoint
+
+**URL:** `/dashboard`
+
+- Type: `GET`
+- Required Body: *Nothing*
+- Required Headers: 
+  - Key: `X-AUTH-TOKEN`
+  - Value: *Token provided from /login request*
+  
+ **Returns**
+ 
+```json
+{
+    "success": "true",
+    "email": "<EMAIL>",
+    "full_name": "<FULL_NAME>",
+    "message": "<MESSAGE>"
+}
+```
